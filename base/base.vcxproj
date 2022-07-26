@@ -101,6 +101,7 @@
     <ClInclude Include="game\misc\addresses.h" />
     <ClInclude Include="game\misc\math.h" />
     <ClInclude Include="game\misc\render.h" />
+    <ClInclude Include="game\misc\utils.h" />
     <ClInclude Include="game\modules.h" />
     <ClInclude Include="game\source_engine\classes\bit_buff.h" />
     <ClInclude Include="game\source_engine\classes\bitflags.h" />
@@ -181,6 +182,7 @@
     <ClCompile Include="game\misc\addresses.cpp" />
     <ClCompile Include="game\misc\math.cpp" />
     <ClCompile Include="game\misc\render.cpp" />
+    <ClCompile Include="game\misc\util.cpp" />
     <ClCompile Include="game\modules.cpp" />
     <ClCompile Include="game\source_engine\classes\bit_buff.cpp" />
     <ClCompile Include="game\source_engine\classes\keyvalues.cpp" />

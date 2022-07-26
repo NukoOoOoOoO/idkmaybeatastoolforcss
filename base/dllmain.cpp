@@ -8,67 +8,74 @@
 
 DWORD WINAPI Setup( LPVOID parameter )
 {
-	try
-	{
-		Hikari::Logger = std::make_unique<Hikari::Console_t>();
-		Hikari::Memory = std::make_unique<Hikari::Memory_t>();
+    try
+    {
+        Hikari::Logger = std::make_unique<Hikari::Console_t>();
+        Hikari::Memory = std::make_unique<Hikari::Memory_t>();
 
-		{
-			Game::Modules::Client = std::make_unique<Game::Modules_t>( "client.dll" );
-			Game::Modules::Engine = std::make_unique<Game::Modules_t>( "engine.dll" );
-			Game::Modules::MaterialSystem = std::make_unique<Game::Modules_t>( "materialsystem.dll" );
-			Game::Modules::StudioRender = std::make_unique<Game::Modules_t>( "studiorender.dll" );
-			Game::Modules::VStdLib = std::make_unique<Game::Modules_t>( "vstdlib.dll" );
-			Game::Modules::MatSurface = std::make_unique<Game::Modules_t>( "vguimatsurface.dll" );
-			Game::Modules::Server = std::make_unique<Game::Modules_t>( "server.dll" );
-			Game::Modules::VGui = std::make_unique<Game::Modules_t>( "vgui2.dll" );
-			Game::Modules::Shaderapidx9 = std::make_unique<Game::Modules_t>( "shaderapidx9.dll" );
-		}
+        {
+            Game::Modules::Client = std::make_unique<Game::Modules_t>( "client.dll" );
+            Game::Modules::Engine = std::make_unique<Game::Modules_t>( "engine.dll" );
+            Game::Modules::MaterialSystem = std::make_unique<Game::Modules_t>( "materialsystem.dll" );
+            Game::Modules::StudioRender = std::make_unique<Game::Modules_t>( "studiorender.dll" );
+            Game::Modules::VStdLib = std::make_unique<Game::Modules_t>( "vstdlib.dll" );
+            Game::Modules::MatSurface = std::make_unique<Game::Modules_t>( "vguimatsurface.dll" );
+            Game::Modules::Server = std::make_unique<Game::Modules_t>( "server.dll" );
+            Game::Modules::VGui = std::make_unique<Game::Modules_t>( "vgui2.dll" );
+            Game::Modules::Shaderapidx9 = std::make_unique<Game::Modules_t>( "shaderapidx9.dll" );
+        }
 
-		Game::Addresses::Setup();
-		Game::Interfaces = std::make_unique<Game::Interfaces_t>();
-		Game::Netvar = std::make_unique<Game::Netvar_t>();
+        Game::Addresses::Setup();
+        Game::Interfaces = std::make_unique<Game::Interfaces_t>();
+        Game::Netvar = std::make_unique<Game::Netvar_t>();
 
-		Game::Hooks = std::make_unique<Game::Hook_t>();
-	}
-	catch ( std::exception& exp )
-	{
-		Hikari::Logger->Error( std::format( "{}", exp.what() ) );
-		_RPT0( _CRT_ERROR, exp.what() );
-		Hikari::Logger->Destory();
+        Game::Hooks = std::make_unique<Game::Hook_t>();
 
-		FreeLibraryAndExitThread( static_cast<HMODULE>(parameter), EXIT_SUCCESS );
-	}
-	return TRUE;
+        if ( Game::Interfaces->EngineClient->IsInGame() )
+        {
+            Game::_serverBot = Game::Util::CreateBot( 2 );
+        }
+    }
+    catch ( std::exception& exp )
+    {
+        Hikari::Logger->Error( std::format( "{}", exp.what() ) );
+        _RPT0( _CRT_ERROR, exp.what() );
+        Hikari::Logger->Destory();
+
+        FreeLibraryAndExitThread( static_cast<HMODULE>(parameter), EXIT_SUCCESS );
+    }
+    return TRUE;
 }
 
 DWORD WINAPI Destroy( LPVOID parameter )
 {
-	while ( !GetAsyncKeyState( VK_F10 ) )
-		std::this_thread::sleep_for( std::chrono::milliseconds( 500 ) );
+    while ( !GetAsyncKeyState( VK_F10 ) )
+        std::this_thread::sleep_for( std::chrono::milliseconds( 500 ) );
 
-	ImGui_ImplDX9_Shutdown();
-	ImGui_ImplWin32_Shutdown();
-	ImGui::DestroyContext();
+    ImGui_ImplDX9_Shutdown();
+    ImGui_ImplWin32_Shutdown();
+    ImGui::DestroyContext();
 
-	Hikari::Logger->Destory();
-	FreeLibraryAndExitThread( static_cast<HMODULE>(parameter), EXIT_SUCCESS );
+    Game::Util::KickBot( Game::_serverBot );
+
+    Hikari::Logger->Destory();
+    FreeLibraryAndExitThread( static_cast<HMODULE>(parameter), EXIT_SUCCESS );
 }
 
 BOOL APIENTRY DllMain( HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved )
 {
-	if ( ul_reason_for_call == DLL_PROCESS_ATTACH )
-	{
-		DisableThreadLibraryCalls( hModule );
+    if ( ul_reason_for_call == DLL_PROCESS_ATTACH )
+    {
+        DisableThreadLibraryCalls( hModule );
 
-		if ( const auto thread = CreateThread( nullptr, 0, Setup, hModule, 0UL, nullptr ); thread != nullptr )
-			CloseHandle( thread );
+        if ( const auto thread = CreateThread( nullptr, 0, Setup, hModule, 0UL, nullptr ); thread != nullptr )
+            CloseHandle( thread );
 
-		if ( const auto thread = CreateThread( nullptr, 0, Destroy, hModule, 0UL, nullptr ); thread != nullptr )
-			CloseHandle( thread );
+        if ( const auto thread = CreateThread( nullptr, 0, Destroy, hModule, 0UL, nullptr ); thread != nullptr )
+            CloseHandle( thread );
 
-		return TRUE;
-	}
+        return TRUE;
+    }
 
-	return TRUE;
+    return TRUE;
 }

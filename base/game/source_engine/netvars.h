@@ -8,7 +8,8 @@ namespace Game
     {
         Netvar_t();
 
-        std::ptrdiff_t& Get( fnv::hash key );
+        std::ptrdiff_t& GetClient( fnv::hash key );
+        std::ptrdiff_t& GetServer( fnv::hash key );
 
     private:
         void Dump( const char* network_name, const RecvTable* table, ptrdiff_t offset = 0 );
@@ -27,14 +28,28 @@ namespace Game
 #define NETVAR_CLIENT( func_type, func, netvar_name ) \
 [[nodiscard]] std::add_lvalue_reference_t<func_type> func()\
 {\
-    static auto offset = Game::Netvar->Get(FNV(netvar_name));\
+    static auto offset = Game::Netvar->GetClient(FNV(netvar_name));\
     return *(std::add_pointer_t<func_type>)(reinterpret_cast<std::uintptr_t>(this) + offset);\
 }
 
 #define NETVAR_OFFSET_CLIENT( func_type, func, netvar_name, off ) \
 [[nodiscard]] std::add_lvalue_reference_t<func_type> func()\
 {\
-    static auto offset = Game::Netvar->Get(FNV(netvar_name));\
+    static auto offset = Game::Netvar->GetClient(FNV(netvar_name));\
+    return *(std::add_pointer_t<func_type>)(reinterpret_cast<std::uintptr_t>(this) + offset + off);\
+}
+
+#define NETVAR_SERVER( func_type, func, netvar_name ) \
+[[nodiscard]] std::add_lvalue_reference_t<func_type> func()\
+{\
+    static auto offset = Game::Netvar->GetServer(FNV(netvar_name));\
+    return *(std::add_pointer_t<func_type>)(reinterpret_cast<std::uintptr_t>(this) + offset);\
+}
+
+#define NETVAR_OFFSET_SERVER( func_type, func, netvar_name, off ) \
+[[nodiscard]] std::add_lvalue_reference_t<func_type> func()\
+{\
+    static auto offset = Game::Netvar->GetServer(FNV(netvar_name));\
     return *(std::add_pointer_t<func_type>)(reinterpret_cast<std::uintptr_t>(this) + offset + off);\
 }
 

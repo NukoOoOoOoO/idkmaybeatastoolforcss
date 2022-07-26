@@ -19,5 +19,8 @@ namespace Game::Addresses
     inline Hikari::Address_t StartDrawing;
     inline Hikari::Address_t FinishDrawing;
 
+    // server.dll
     inline Hikari::Address_t GetEntityByIndex;
+    inline Hikari::Address_t CreateBots;
+    inline Hikari::Address_t SetPlayerName;
 }

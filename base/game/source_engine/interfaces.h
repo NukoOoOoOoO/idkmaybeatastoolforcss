@@ -47,7 +47,7 @@ namespace Game
 
         // engine.dll
         IEngineClient_t* EngineClient;
-        void* EngineServer;
+        IEngineServer_t* EngineServer;
         IRenderView_t* RenderView;
         IModelRender_t* ModelRender;
         INetChannel_t* NetChannel{};

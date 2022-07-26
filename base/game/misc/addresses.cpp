@@ -14,6 +14,7 @@ void Game::Addresses::Setup()
     StartDrawing = Modules::MatSurface->FindPattern( "55 8B EC 64 A1 00 00 00 00 6A FF 68 ? ? ? ? 50 64 89 25 00 00 00 00 83 EC 14" );
     FinishDrawing = Modules::MatSurface->FindPattern( "55 8B EC 6A FF 68 ? ? ? ? 64 A1 00 00 00 00 50 64 89 25 00 00 00 00 51 56 6A 00" );
 
-    // Could have used GetListenServerHost but we will add a bot for playing replay later so here we go
     GetEntityByIndex = Modules::Server->FindPattern( "E8 ? ? ? ? 53 8B F0", true );
+    CreateBots = Modules::Server->FindPattern( "55 8B EC 83 EC 40 FF 15" );
+    SetPlayerName = Modules::Server->FindPattern("E8 ? ? ? ? 8B 46 18 5F", true);
 }

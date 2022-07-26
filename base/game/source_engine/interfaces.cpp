@@ -18,7 +18,7 @@ namespace Game
 
         {
             EngineClient = GetInterface<IEngineClient_t>( engine, "VEngineClient014" );
-            EngineServer = GetInterface<void>( engine, "VEngineServer023" );
+            EngineServer = GetInterface<IEngineServer_t>( engine, "VEngineServer023" );
             ModelInfo = GetInterface<IModelInfo_t>( engine, "VModelInfoClient006" );
             TraceClient = GetInterface<IEngineTrace_t>( engine, "EngineTraceClient003" );
             RenderView = GetInterface<IRenderView_t>( engine, "VEngineRenderView" );

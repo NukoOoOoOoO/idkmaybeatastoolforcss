@@ -263,7 +263,40 @@ namespace Client
 
 namespace Server
 {
-    struct C_BaseEntity
+    struct CBaseEntity_t
     {
+        NETVAR_SERVER(Vector3D_t, GetMins, "C_BaseEntity->m_vecMins");
+        NETVAR_SERVER(Vector3D_t, GetMaxs, "C_BaseEntity->m_vecMaxs");
+        NETVAR_SERVER(Vector3D_t, GetAbsVelocity, "C_BaseEntity->m_vecAbsVelocity");
+        NETVAR_SERVER(Vector3D_t, GetVelocity, "C_BaseEntity->m_vecVelocity");
+    };
+
+    struct CBaseCombatCharacter_t : CBaseEntity_t
+    {
+        
+    };
+
+    struct CBasePlayer_t : CBaseCombatCharacter_t
+    {
+        NETVAR_SERVER(float, GetMaxSpeed, "C_BasePlayer->m_flMaxspeed");
+        NETVAR_SERVER(const char*, GetPlayerName, "C_BasePlayer->m_szNetname");
+    };
+
+    struct CCSPlayer_t : CBasePlayer_t
+    {
+        void ChangeTeam(int team)
+        {
+            return Hikari::Memory->VirtualCall<void, 91>(this, team);
+        }
+
+        void InitialSpawn()
+        {
+            return Hikari::Memory->VirtualCall<void, 326>(this);
+        }
+
+        void Spawn()
+        {
+            return Hikari::Memory->VirtualCall<void, 22>(this);
+        }
     };
 }

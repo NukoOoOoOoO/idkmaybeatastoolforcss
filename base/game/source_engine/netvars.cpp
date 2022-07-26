@@ -75,12 +75,20 @@ namespace Game
         #endif
     }
 
-    std::ptrdiff_t& Netvar_t::Get( const fnv::hash key )
+    std::ptrdiff_t& Netvar_t::GetClient( const fnv::hash key )
     {
         if ( !this->_netProps.contains( key ) )
-            throw std::runtime_error( "Unable to find netprop" );
+            throw std::runtime_error( "Unable to find client netprop" );
 
         return this->_netProps[key];
+    }
+
+    std::ptrdiff_t& Netvar_t::GetServer( const fnv::hash key )
+    {
+        if ( !this->_serverNetProps.contains( key ) )
+            throw std::runtime_error( "Unable to find server netprop" );
+
+        return this->_serverNetProps[key];
     }
 
     void Netvar_t::Dump( const char* network_name, const RecvTable* table, const ptrdiff_t offset )
