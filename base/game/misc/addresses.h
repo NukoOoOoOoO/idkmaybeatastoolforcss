@@ -19,5 +19,5 @@ namespace Game::Addresses
     inline Hikari::Address_t StartDrawing;
     inline Hikari::Address_t FinishDrawing;
 
-    inline Hikari::Address_t GetListenServerHost;
+    inline Hikari::Address_t GetEntityByIndex;
 }

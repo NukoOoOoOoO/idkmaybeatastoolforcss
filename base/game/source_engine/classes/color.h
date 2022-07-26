@@ -13,7 +13,7 @@ public:
     // constructors
     Color_t()
     {
-        *reinterpret_cast<int*>( this ) = 0;
+        *reinterpret_cast<int*>(this) = 0;
     }
 
     Color_t( uint8_t r, uint8_t g, uint8_t b )
@@ -28,54 +28,54 @@ public:
 
     void SetColor( uint8_t r, uint8_t g, uint8_t b, uint8_t a = 0 )
     {
-        _color[ 0 ] = r;
-        _color[ 1 ] = g;
-        _color[ 2 ] = b;
-        _color[ 3 ] = a;
+        _color[0] = r;
+        _color[1] = g;
+        _color[2] = b;
+        _color[3] = a;
     }
 
     void GetColor( uint8_t& r, uint8_t& g, uint8_t& b, uint8_t& a ) const
     {
-        r = _color[ 0 ];
-        g = _color[ 1 ];
-        b = _color[ 2 ];
-        a = _color[ 3 ];
+        r = _color[0];
+        g = _color[1];
+        b = _color[2];
+        a = _color[3];
     }
 
     void GetColor( int& _r, int& _g, int& _b, int& _a ) const
     {
-        _r = _color[ 0 ];
-        _g = _color[ 1 ];
-        _b = _color[ 2 ];
-        _a = _color[ 3 ];
+        _r = _color[0];
+        _g = _color[1];
+        _b = _color[2];
+        _a = _color[3];
     }
 
     static Color_t FromARGB( unsigned long color )
     {
-        int a = ( color & 0xFF000000 ) >> 24;
-        int r = ( color & 0x00FF0000 ) >> 16;
-        int g = ( color & 0x0000FF00 ) >> 8;
-        int b = ( color & 0x000000FF );
+        int a = (color & 0xFF000000) >> 24;
+        int r = (color & 0x00FF0000) >> 16;
+        int g = (color & 0x0000FF00) >> 8;
+        int b = (color & 0x000000FF);
 
         return Color_t( r, g, b, a );
     }
 
     void SetARGB( unsigned long color )
     {
-        int a = ( color & 0xFF000000 ) >> 24;
-        int r = ( color & 0x00FF0000 ) >> 16;
-        int g = ( color & 0x0000FF00 ) >> 8;
-        int b = ( color & 0x000000FF );
+        int a = (color & 0xFF000000) >> 24;
+        int r = (color & 0x00FF0000) >> 16;
+        int g = (color & 0x0000FF00) >> 8;
+        int b = (color & 0x000000FF);
 
         SetColor( r, g, b, a );
     }
 
     DWORD GetARGB() const
     {
-        const int a = ( _color[ 3 ] ) >> 24;
-        const int r = ( _color[ 0 ] ) >> 16;
-        const int g = ( _color[ 1 ] ) >> 8;
-        const int b = ( _color[ 2 ] );
+        const int a = (_color[3]) >> 24;
+        const int r = (_color[0]) >> 16;
+        const int g = (_color[1]) >> 8;
+        const int b = (_color[2]);
 
         return a | r | g | b;
     }
@@ -83,111 +83,111 @@ public:
     static Color_t FromHSB( const float hue, const float saturation, const float brightness )
     {
         const float h = hue == 1.0f ? 0 : hue * 6.0f;
-        const float f = h - static_cast<int>( h );
-        const float p = brightness * ( 1.0f - saturation );
-        const float q = brightness * ( 1.0f - saturation * f );
-        const float t = brightness * ( 1.0f - ( saturation * ( 1.0f - f ) ) );
+        const float f = h - static_cast<int>(h);
+        const float p = brightness * (1.0f - saturation);
+        const float q = brightness * (1.0f - saturation * f);
+        const float t = brightness * (1.0f - (saturation * (1.0f - f)));
 
         if ( h < 1 )
         {
-            return Color_t( static_cast<unsigned char>( brightness * 255 ), static_cast<unsigned char>( t * 255 ), static_cast<unsigned char>( p * 255 ) );
+            return Color_t( static_cast<unsigned char>(brightness * 255), static_cast<unsigned char>(t * 255), static_cast<unsigned char>(p * 255) );
         }
 
         if ( h < 2 )
         {
-            return Color_t( static_cast<unsigned char>( q * 255 ), static_cast<unsigned char>( brightness * 255 ), static_cast<unsigned char>( p * 255 ) );
+            return Color_t( static_cast<unsigned char>(q * 255), static_cast<unsigned char>(brightness * 255), static_cast<unsigned char>(p * 255) );
         }
 
         if ( h < 3 )
         {
-            return Color_t( static_cast<unsigned char>( p * 255 ), static_cast<unsigned char>( brightness * 255 ), static_cast<unsigned char>( t * 255 ) );
+            return Color_t( static_cast<unsigned char>(p * 255), static_cast<unsigned char>(brightness * 255), static_cast<unsigned char>(t * 255) );
         }
 
         if ( h < 4 )
         {
-            return Color_t( static_cast<unsigned char>( p * 255 ), static_cast<unsigned char>( q * 255 ), static_cast<unsigned char>( brightness * 255 ) );
+            return Color_t( static_cast<unsigned char>(p * 255), static_cast<unsigned char>(q * 255), static_cast<unsigned char>(brightness * 255) );
         }
 
         if ( h < 5 )
         {
-            return Color_t( static_cast<unsigned char>( t * 255 ), static_cast<unsigned char>( p * 255 ), static_cast<unsigned char>( brightness * 255 ) );
+            return Color_t( static_cast<unsigned char>(t * 255), static_cast<unsigned char>(p * 255), static_cast<unsigned char>(brightness * 255) );
         }
 
-        return Color_t( static_cast<unsigned char>( brightness * 255 ), static_cast<unsigned char>( p * 255 ), static_cast<unsigned char>( q * 255 ) );
+        return Color_t( static_cast<unsigned char>(brightness * 255), static_cast<unsigned char>(p * 255), static_cast<unsigned char>(q * 255) );
     }
 
     uint8_t& operator[]( int index )
     {
-        return _color[ index ];
+        return _color[index];
     }
 
     const uint8_t& operator[]( const int& index ) const
     {
-        return _color[ index ];
+        return _color[index];
     }
 
     bool operator ==( const Color_t& rhs ) const
     {
-        return ( *( ( int* )this ) == *( ( int* )&rhs ) );
+        return (*((int*)this) == *((int*)&rhs));
     }
 
     bool operator !=( const Color_t& rhs ) const
     {
-        return !( operator==( rhs ) );
+        return !(operator==( rhs ));
     }
 
     int r() const
     {
-        return _color[ 0 ];
+        return _color[0];
     }
 
     int g() const
     {
-        return _color[ 1 ];
+        return _color[1];
     }
 
     int b() const
     {
-        return _color[ 2 ];
+        return _color[2];
     }
 
     int a() const
     {
-        return _color[ 3 ];
+        return _color[3];
     }
 
     void SetR( const uint8_t& _i )
     {
-        _color[ 0 ] = _i;
+        _color[0] = _i;
     }
 
     void SetG( const uint8_t& _i )
     {
-        _color[ 1 ] = _i;
+        _color[1] = _i;
     }
 
     void SetB( const uint8_t& _i )
     {
-        _color[ 2 ] = _i;
+        _color[2] = _i;
     }
 
     void SetA( const uint8_t& _i )
     {
-        _color[ 3 ] = _i;
+        _color[3] = _i;
     }
 
     Color_t& operator=( const Color_t& rhs )
     {
-        *reinterpret_cast<int*>( &_color[ 0 ] ) = *( int* )&rhs._color[ 0 ];
+        *reinterpret_cast<int*>(&_color[0]) = *(int*)&rhs._color[0];
         return *this;
     }
 
     Color_t operator+( const Color_t& rhs ) const
     {
-        int red = _color[ 0 ] + rhs._color[ 0 ];
-        int green = _color[ 1 ] + rhs._color[ 1 ];
-        int blue = _color[ 2 ] + rhs._color[ 2 ];
-        int alpha = _color[ 3 ] + rhs._color[ 3 ];
+        int red = _color[0] + rhs._color[0];
+        int green = _color[1] + rhs._color[1];
+        int blue = _color[2] + rhs._color[2];
+        int alpha = _color[3] + rhs._color[3];
 
         red = red > 255 ? 255 : red;
         green = green > 255 ? 255 : green;
@@ -199,10 +199,10 @@ public:
 
     Color_t operator-( const Color_t& rhs ) const
     {
-        int red = _color[ 0 ] - rhs._color[ 0 ];
-        int green = _color[ 1 ] - rhs._color[ 1 ];
-        int blue = _color[ 2 ] - rhs._color[ 2 ];
-        int alpha = _color[ 3 ] - rhs._color[ 3 ];
+        int red = _color[0] - rhs._color[0];
+        int green = _color[1] - rhs._color[1];
+        int blue = _color[2] - rhs._color[2];
+        int alpha = _color[3] - rhs._color[3];
 
         red = red < 0 ? 0 : red;
         green = green < 0 ? 0 : green;
@@ -213,38 +213,38 @@ public:
 
     float* Base() const
     {
-        float clr[ 3 ];
+        float clr[3];
 
-        clr[ 0 ] = _color[ 0 ] / 255.0f;
-        clr[ 1 ] = _color[ 1 ] / 255.0f;
-        clr[ 2 ] = _color[ 2 ] / 255.0f;
+        clr[0] = _color[0] / 255.0f;
+        clr[1] = _color[1] / 255.0f;
+        clr[2] = _color[2] / 255.0f;
 
-        return &clr[ 0 ];
+        return &clr[0];
     }
 
     float rBase() const
     {
-        return _color[ 0 ] / 255.0f;
+        return _color[0] / 255.0f;
     }
 
     float gBase() const
     {
-        return _color[ 1 ] / 255.0f;
+        return _color[1] / 255.0f;
     }
 
     float bBase() const
     {
-        return _color[ 2 ] / 255.0f;
+        return _color[2] / 255.0f;
     }
 
     float aBase() const
     {
-        return _color[ 3 ] / 255.0f;
+        return _color[3] / 255.0f;
     }
 
     operator const uint8_t*() const
     {
-        return &_color[ 0 ];
+        return &_color[0];
     }
 
     DEFCOLOR_SRC( Black, 0, 0, 0 );
@@ -316,7 +316,7 @@ public:
     DEFCOLOR_SRC( LightGray, 211, 211, 211 );
     DEFCOLOR_SRC( Gainsboro, 220, 220, 220 );
 private:
-    uint8_t _color[ 4 ];
+    uint8_t _color[4];
 };
 
 #pragma warning(pop)

@@ -2,7 +2,6 @@
 
 namespace Game::Menu
 {
-	void Render();
-	inline bool shouldDraw = false;
+    void Render();
+    inline bool shouldDraw = false;
 };
-

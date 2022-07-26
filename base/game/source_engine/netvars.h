@@ -4,24 +4,24 @@
 
 namespace Game
 {
-	struct Netvar_t
-	{
-		Netvar_t();
+    struct Netvar_t
+    {
+        Netvar_t();
 
-		std::ptrdiff_t& Get( fnv::hash key );
+        std::ptrdiff_t& Get( fnv::hash key );
 
-	private:
-		void Dump( const char* network_name, const RecvTable* table, ptrdiff_t offset = 0 );
-		void DumpDatamap(const char* field_name, const Datamap_t* map, ptrdiff_t offset = 0, bool embedded = false);
+    private:
+        void Dump( const char* network_name, const RecvTable* table, ptrdiff_t offset = 0 );
+        void DumpDatamap( const char* field_name, const Datamap_t* map, ptrdiff_t offset = 0, bool embedded = false );
 
-		void DumpServer(const char* network_name, const SendTable* table, ptrdiff_t offset = 0);
-		void DumpServerDatamap(const char* field_name, const Datamap_t* map, ptrdiff_t offset = 0, bool embedded = false);
+        void DumpServer( const char* network_name, const SendTable* table, ptrdiff_t offset = 0 );
+        void DumpServerDatamap( const char* field_name, const Datamap_t* map, ptrdiff_t offset = 0, bool embedded = false );
 
-		std::unordered_map<fnv::hash, ptrdiff_t> _netProps;
-		std::unordered_map<fnv::hash, ptrdiff_t> _serverNetProps;
-	};
+        std::unordered_map<fnv::hash, ptrdiff_t> _netProps;
+        std::unordered_map<fnv::hash, ptrdiff_t> _serverNetProps;
+    };
 
-	inline std::unique_ptr<Netvar_t> Netvar;
+    inline std::unique_ptr<Netvar_t> Netvar;
 }
 
 #define NETVAR_CLIENT( func_type, func, netvar_name ) \

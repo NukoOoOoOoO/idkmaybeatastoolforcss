@@ -10,8 +10,8 @@ struct IGameMovement_t
 
 struct CPlayerMove_t
 {
-    auto SetupMove(void* player, CUserCmd* cmd, void* moveHelper, CMoveData* moveData)
+    auto SetupMove( void* player, CUserCmd* cmd, void* moveHelper, CMoveData* moveData )
     {
-        return Hikari::Memory->VirtualCall<void, 1>(this, player, cmd, moveHelper, moveData);
+        return Hikari::Memory->VirtualCall<void, 1>( this, player, cmd, moveHelper, moveData );
     }
 };

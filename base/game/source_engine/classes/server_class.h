@@ -7,7 +7,8 @@ using ArrayLengthSendProxy_fn = int(*)( const void*, int );
 using SendVarProxy_fn = void(*)( const void*, const void*, const void*, void*, int, int );
 using SendTableProxy_fn = void* (*)( const void*, const void*, const void*, void*, int );
 
-typedef enum {
+using SendPropType = enum
+{
     DPT_Int = 0,
     DPT_Float,
     DPT_Vector,
@@ -17,7 +18,7 @@ typedef enum {
     DPT_DataTable,
     DPT_Int64,
     DPT_NUMSendPropTypes
-} SendPropType;
+};
 
 class SendProp
 {

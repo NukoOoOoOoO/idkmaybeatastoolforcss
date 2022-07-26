@@ -4,18 +4,18 @@ namespace Game
 {
     struct Modules_t
     {
-        explicit Modules_t(HMODULE handle);
-        explicit Modules_t(const std::string& name);
+        explicit Modules_t( HMODULE handle );
+        explicit Modules_t( const std::string& name );
 
     private:
         Hikari::ModuleInfo_t _info{};
         void* _interface_list{};
 
     public:
-        Hikari::Address_t FindPattern(const char* pattern, bool relative = false) const;
-        Hikari::Address_t GetVTablePointer(const std::string& vtable) const;
+        Hikari::Address_t FindPattern( const char* pattern, bool relative = false ) const;
+        Hikari::Address_t GetVTablePointer( const std::string& vtable ) const;
 
-        [[nodiscard]]void* GetInterfaceList() const
+        [[nodiscard]] void* GetInterfaceList() const
         {
             return this->_interface_list;
         }
@@ -38,6 +38,5 @@ namespace Game
         inline std::unique_ptr<Modules_t> VGui;
         inline std::unique_ptr<Modules_t> Server;
         inline std::unique_ptr<Modules_t> Shaderapidx9;
-
     }
 }

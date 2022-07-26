@@ -11,13 +11,13 @@ namespace Game::Render
 
     Vector2D_t GetTextSize( const unsigned long& font, const std::string& text );
     void Text( HFont font, const std::string& text, int x, int y, bool centered, Color_t col );
-    void Text(HFont, Vector2D_t pos, const std::string& str, Color_t clr, bool center = false);
+    void Text( HFont, Vector2D_t pos, const std::string& str, Color_t clr, bool center = false );
 
     Vector2D_t GetScreenSize();
 }
 
 namespace Game::Fonts
 {
-    inline HFont ESP {};
-    inline HFont WaterMark {};
+    inline HFont ESP{};
+    inline HFont WaterMark{};
 }

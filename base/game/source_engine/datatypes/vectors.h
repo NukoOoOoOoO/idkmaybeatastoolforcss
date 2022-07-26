@@ -14,7 +14,7 @@ public:
 
     [[nodiscard]] bool IsZero() const
     {
-        return ( std::fpclassify( this->x ) == FP_ZERO && std::fpclassify( this->y ) == FP_ZERO );
+        return (std::fpclassify( this->x ) == FP_ZERO && std::fpclassify( this->y ) == FP_ZERO);
     }
 
     float x, y;
@@ -27,7 +27,7 @@ public:
     {
     }
 
-    constexpr Vector3D_t( const float* arrVector ) : x( arrVector[ 0 ] ), y( arrVector[ 1 ] ), z( arrVector[ 2 ] )
+    constexpr Vector3D_t( const float* arrVector ) : x( arrVector[0] ), y( arrVector[1] ), z( arrVector[2] )
     {
     }
 
@@ -47,22 +47,22 @@ public:
 
     [[nodiscard]] float* data()
     {
-        return reinterpret_cast<float*>( this );
+        return reinterpret_cast<float*>(this);
     }
 
     [[nodiscard]] const float* data() const
     {
-        return reinterpret_cast<float*>( const_cast<Vector3D_t*>( this ) );
+        return reinterpret_cast<float*>(const_cast<Vector3D_t*>(this));
     }
 
     float& operator[]( const std::size_t i )
     {
-        return this->data()[ i ];
+        return this->data()[i];
     }
 
     const float& operator[]( const std::size_t i ) const
     {
-        return this->data()[ i ];
+        return this->data()[i];
     }
 
     bool operator==( const Vector3D_t& vecBase ) const
@@ -197,12 +197,12 @@ public:
 
     [[nodiscard]] bool IsEqual( const Vector3D_t& vecEqual, const float flErrorMargin = std::numeric_limits<float>::epsilon() ) const
     {
-        return ( std::fabsf( this->x - vecEqual.x ) < flErrorMargin && std::fabsf( this->y - vecEqual.y ) < flErrorMargin && std::fabsf( this->z - vecEqual.z ) < flErrorMargin );
+        return (std::fabsf( this->x - vecEqual.x ) < flErrorMargin && std::fabsf( this->y - vecEqual.y ) < flErrorMargin && std::fabsf( this->z - vecEqual.z ) < flErrorMargin);
     }
 
     [[nodiscard]] bool IsZero() const
     {
-        return ( std::fpclassify( this->x ) == FP_ZERO && std::fpclassify( this->y ) == FP_ZERO && std::fpclassify( this->z ) == FP_ZERO );
+        return (std::fpclassify( this->x ) == FP_ZERO && std::fpclassify( this->y ) == FP_ZERO && std::fpclassify( this->z ) == FP_ZERO);
     }
 
     [[nodiscard]] Vector2D_t ToVector2D() const
@@ -227,17 +227,17 @@ public:
 
     [[nodiscard]] constexpr float Length2DSqr() const
     {
-        return ( this->x * this->x + this->y * this->y );
+        return (this->x * this->x + this->y * this->y);
     }
 
     [[nodiscard]] float DistTo( const Vector3D_t& vecEnd ) const
     {
-        return ( *this - vecEnd ).Length();
+        return (*this - vecEnd).Length();
     }
 
     [[nodiscard]] constexpr float DistToSqr( const Vector3D_t& vecEnd ) const
     {
-        return ( *this - vecEnd ).LengthSqr();
+        return (*this - vecEnd).LengthSqr();
     }
 
     [[nodiscard]] Vector3D_t Normalized() const
@@ -250,7 +250,7 @@ public:
     float NormalizeInPlace()
     {
         const float flLength = this->Length();
-        const float flRadius = 1.0f / ( flLength + std::numeric_limits<float>::epsilon() );
+        const float flRadius = 1.0f / (flLength + std::numeric_limits<float>::epsilon());
 
         this->x *= flRadius;
         this->y *= flRadius;
@@ -261,14 +261,13 @@ public:
 
     [[nodiscard]] constexpr float DotProduct( const Vector3D_t& vecDot ) const
     {
-        return ( this->x * vecDot.x + this->y * vecDot.y + this->z * vecDot.z );
+        return (this->x * vecDot.x + this->y * vecDot.y + this->z * vecDot.z);
     }
 
     [[nodiscard]] constexpr Vector3D_t CrossProduct( const Vector3D_t& vecCross ) const
     {
         return Vector3D_t( this->y * vecCross.z - this->z * vecCross.y, this->z * vecCross.x - this->x * vecCross.z, this->x * vecCross.y - this->y * vecCross.x );
     }
-
 
 
     float x, y, z;

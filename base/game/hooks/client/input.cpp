@@ -17,9 +17,9 @@ namespace Game
 
         _clientLocalPlayer = Interfaces->EntityList->Get<Client::CCSPlayer_t*>( Interfaces->EngineClient->GetLocalPlayer() );
 
-        if (_clientLocalPlayer)
+        if ( _clientLocalPlayer )
         {
-            if (_clientLocalPlayer->IsAlive() )
+            if ( _clientLocalPlayer->IsAlive() )
             {
             }
         }

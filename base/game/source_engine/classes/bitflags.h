@@ -10,8 +10,9 @@ struct bitflag_t
     /// <summary>
     /// Creates a bitflag object with the given flags
     /// </summary>
-    bitflag_t(uintptr_t flags) : m_flags(flags)
-    {}
+    bitflag_t( uintptr_t flags ) : m_flags( flags )
+    {
+    }
 
     /// <summary>
     /// Destroys the bitflag object
@@ -28,7 +29,7 @@ struct bitflag_t
     /// </summary>
     /// <param name="flag">Flag that will be checked</param>
     /// <returns>Returns true if the flag is present in the stored flags</returns>
-    bool HasFlag(uintptr_t flag)
+    bool HasFlag( uintptr_t flag )
     {
         return m_flags & flag;
     }
@@ -37,7 +38,7 @@ struct bitflag_t
     /// Adds the given flag to the stored flags
     /// </summary>
     /// <param name="flag">Flag that will be added</param>
-    void AddFlag(uintptr_t flag)
+    void AddFlag( uintptr_t flag )
     {
         m_flags |= flag;
     }
@@ -46,7 +47,7 @@ struct bitflag_t
     /// Removes the given flag to the stored flags
     /// </summary>
     /// <param name="flag">Flag that will be removed</param>
-    void RemoveFlag(uintptr_t flag)
+    void RemoveFlag( uintptr_t flag )
     {
         m_flags &= ~flag;
     }

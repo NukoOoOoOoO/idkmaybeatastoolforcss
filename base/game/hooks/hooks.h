@@ -17,7 +17,7 @@ namespace Game
     CREATE_HOOK_DEFINE( LevelInitPostEntity, void(__fastcall*)(void*, void*) );
     CREATE_HOOK_DEFINE( LevelShutdown, void(__fastcall*)(void*, void*) );
 
-    CREATE_HOOK_DEFINE(GameMovement_CheckButtons, bool(__fastcall*)(void*, void*));
+    CREATE_HOOK_DEFINE( GameMovement_CheckButtons, bool(__fastcall*)(void*, void*) );
 
     extern LRESULT __stdcall WndProc( HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam );
 

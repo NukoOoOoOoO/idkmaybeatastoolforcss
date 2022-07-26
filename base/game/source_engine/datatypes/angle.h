@@ -12,7 +12,7 @@ public:
     {
     }
 
-    constexpr Angle_t( const float* arrAngles ) : x( arrAngles[ 0 ] ), y( arrAngles[ 1 ] ), z( arrAngles[ 2 ] )
+    constexpr Angle_t( const float* arrAngles ) : x( arrAngles[0] ), y( arrAngles[1] ), z( arrAngles[2] )
     {
     }
 
@@ -140,12 +140,12 @@ public:
 
     [[nodiscard]] bool IsEqual( const Angle_t& angEqual, const float flErrorMargin = std::numeric_limits<float>::epsilon() ) const
     {
-        return ( std::fabsf( this->x - angEqual.x ) < flErrorMargin && std::fabsf( this->y - angEqual.y ) < flErrorMargin && std::fabsf( this->z - angEqual.z ) < flErrorMargin );
+        return (std::fabsf( this->x - angEqual.x ) < flErrorMargin && std::fabsf( this->y - angEqual.y ) < flErrorMargin && std::fabsf( this->z - angEqual.z ) < flErrorMargin);
     }
 
     [[nodiscard]] bool IsZero() const
     {
-        return ( std::fpclassify( this->x ) == FP_ZERO && std::fpclassify( this->y ) == FP_ZERO && std::fpclassify( this->z ) == FP_ZERO );
+        return (std::fpclassify( this->x ) == FP_ZERO && std::fpclassify( this->y ) == FP_ZERO && std::fpclassify( this->z ) == FP_ZERO);
     }
 
     Angle_t Clamp()

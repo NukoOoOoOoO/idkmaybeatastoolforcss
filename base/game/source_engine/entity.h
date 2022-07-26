@@ -83,7 +83,7 @@ namespace Client
         NETVAR_CLIENT( std::size_t, GetOwner, "C_BaseCombatWeapon->m_hOwnerEntity" )
         NETVAR_CLIENT( float, GetThrowTime, "C_BaseCSGrenade->m_fThrowTime" )
     };
-    
+
     class CCSWeaponInfo_t
     {
         #define MAX_WEAPON_STRING	80
@@ -265,6 +265,5 @@ namespace Server
 {
     struct C_BaseEntity
     {
-        
     };
 }

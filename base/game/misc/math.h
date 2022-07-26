@@ -15,12 +15,12 @@ namespace Game::Math
 
     inline float Rad2Deg( const float rad )
     {
-        return static_cast<float>( rad * ( 180.f / std::numbers::pi ) );
+        return static_cast<float>(rad * (180.f / std::numbers::pi));
     }
 
     inline float Deg2Rad( const float deg )
     {
-        return static_cast<float>( deg * ( std::numbers::pi / 180.f ) );
+        return static_cast<float>(deg * (std::numbers::pi / 180.f));
     }
 
     inline void SinCos( const float rad, float& sine, float& cosine )

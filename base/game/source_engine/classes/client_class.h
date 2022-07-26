@@ -4,7 +4,7 @@ struct RecvProxyData;
 struct RecvTable;
 struct RecvProp;
 
-using RecvVarProxy_t = void(__cdecl*)(const RecvProxyData*, void*, void*);
+using RecvVarProxy_t = void(__cdecl*)( const RecvProxyData*, void*, void* );
 
 struct DVariant
 {
@@ -57,7 +57,7 @@ struct RecvProp
     const char* m_pParentArrayPropName;
 };
 
-using CreateClientClass_t = void* (*)(int entnum, int serialNum);
+using CreateClientClass_t = void* (*)( int entnum, int serialNum );
 using CreateEvent_t = void* (*)();
 
 class ClientClass_t

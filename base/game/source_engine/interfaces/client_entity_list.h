@@ -2,20 +2,20 @@
 
 struct IClientEntityList_t
 {
-    template < class T >
-    T Get(int index)
+    template <class T>
+    T Get( int index )
     {
-        return Hikari::Memory->VirtualCall<T, 3>(this, index);
+        return Hikari::Memory->VirtualCall<T, 3>( this, index );
     }
 
-    template < class T >
-    T GetFromHandle(uintptr_t index)
+    template <class T>
+    T GetFromHandle( uintptr_t index )
     {
-        return Hikari::Memory->VirtualCall<T, 4>(this, index);
+        return Hikari::Memory->VirtualCall<T, 4>( this, index );
     }
 
     auto GetHighestEntityIndex()
     {
-        return Hikari::Memory->VirtualCall<int, 6>(this);
+        return Hikari::Memory->VirtualCall<int, 6>( this );
     }
 };

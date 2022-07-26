@@ -47,11 +47,11 @@ namespace Game
             }
         }
 
-#ifdef DUMP_NETVAR
+        #ifdef DUMP_NETVAR
         _file.close();
 
         _file.open("server_netvar.txt");
-#endif
+        #endif
 
         for ( auto ptr = Interfaces->ServerDLL->GetAllClasses(); ptr; ptr = ptr->pNext )
         {
@@ -60,7 +60,7 @@ namespace Game
                 DumpServer( ptr->szNetworkName, ptr->pTable );
             }
         }
-        
+
         if ( auto datamap = Modules::Server->FindPattern( "55 8B EC 51 89 4D FC B8 ? ? ? ? 8B E5 5D C3 8A 81" ).Cast<Datamap_t*(*)()>()(); datamap )
         {
             while ( datamap )
@@ -163,9 +163,9 @@ namespace Game
             {
                 this->_serverNetProps[hash] = prop->iOffset + offset;
 
-#ifdef DUMP_NETVAR
+                #ifdef DUMP_NETVAR
                 _file << std::format("{} ==> {:#04X}", proper_name, prop->iOffset + offset).c_str() << std::endl;
-#endif
+                #endif
             }
         }
     }
@@ -181,16 +181,16 @@ namespace Game
             if ( field.type == fieldtype_t::FIELD_EMBEDDED )
                 DumpDatamap( field_name, field.td, field.offset[TD_OFFSET_NORMAL] + offset, true );
 
-            std::string proper_name(field_name);
-            proper_name = "C_" + (proper_name[0] == 'C' ? proper_name.substr(1) : field_name) + "->" + field.name;
+            std::string proper_name( field_name );
+            proper_name = "C_" + (proper_name[0] == 'C' ? proper_name.substr( 1 ) : field_name) + "->" + field.name;
             // Hikari::Logger->Info( std::format( "{}->{} ==> {:#04X}", field_name, field.name, field.offset[ TD_OFFSET_NORMAL ] + offset ) );
 
-            if ( const auto hash = fnv::hash_runtime(proper_name.c_str()); !this->_serverNetProps[hash] )
+            if ( const auto hash = fnv::hash_runtime( proper_name.c_str() ); !this->_serverNetProps[hash] )
             {
                 this->_serverNetProps[hash] = field.offset[TD_OFFSET_NORMAL] + offset;
-#ifdef DUMP_NETVAR
+                #ifdef DUMP_NETVAR
                 _file << std::format("{} ==> {:#04X}", proper_name, field.offset[TD_OFFSET_NORMAL] + offset) << std::endl;
-#endif
+                #endif
             }
         }
     }

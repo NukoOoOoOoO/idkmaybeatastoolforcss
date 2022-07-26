@@ -97,8 +97,6 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="game\game.h" />
     <ClInclude Include="game\hooks\hooks.h" />
-    <ClInclude Include="game\config.h" />
-    <ClInclude Include="game\menu\fonts.h" />
     <ClInclude Include="game\menu\menu.h" />
     <ClInclude Include="game\misc\addresses.h" />
     <ClInclude Include="game\misc\math.h" />
